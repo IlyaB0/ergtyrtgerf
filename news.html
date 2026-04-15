@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветничок у Оли | Новости и FAQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Специфичные стили для страницы новостей */
+        
+        /* Переменные для кнопок */
+        :root {
+            --btn-gradient: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            --btn-hover-gradient: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+            --btn-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+            --btn-hover-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+            --border-radius-lg: 12px;
+            --border-radius-xl: 20px;
+        }
+        
+        /* Красивые кнопки */
+        .btn-primary, .filter-btn, .faq-category-btn, .news-read-more, 
+        .archive-item-link, .support-button, .logout-btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--btn-gradient);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: var(--border-radius-xl);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: var(--btn-shadow);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 120px;
+        }
+        
+        .btn-primary:hover {
+            background: var(--btn-hover-gradient);
+            transform: translateY(-3px);
+            box-shadow: var(--btn-hover-shadow);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(211, 47, 47, 0.3);
+        }
+        
+        .btn-primary i {
+            font-size: 1.1rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+            padding: 12px 26px;
+            border-radius: var(--border-radius-xl);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-red);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--btn-shadow);
+        }
+        
+        /* Анимация волны при клике */
+        .btn-primary::after, .btn-outline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+        
+        .btn-primary:active::after, .btn-outline:active::after {
+            transform: scale(0, 0);
+            opacity: .3;
+            transition: 0s;
+        }
+        
+        /* Герой-секция */
+        .news-hero {
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.85) 0%, rgba(183, 28, 28, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .news-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .news-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease;
+        }
+        
+        .news-hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Основной контент */
+        .news-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .news-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: var(--dark-red);
+            margin-bottom: 60px;
+            font-family: 'Brush Script MT', cursive;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .news-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+        
+        /* Фильтры новостей */
+        .news-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .filter-btn {
+            padding: 12px 28px;
+            background: white;
+            border: 2px solid var(--pale-red);
+            border-radius: var(--border-radius-xl);
+            color: var(--dark-gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+        
+        .filter-btn.active {
+            background: var(--btn-gradient);
+            color: white;
+            border-color: var(--primary-red);
+            box-shadow: var(--btn-shadow);
+        }
+        
+        /* Сетка новостей */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 100px;
+        }
+        
+        .news-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            height: 100%;
+            position: relative;
+        }
+        
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-red), var(--dark-red));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .news-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .news-badge {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            color: var(--white);
+            padding: 8px 25px;
+            border-radius: 0 20px 20px 0;
+            font-weight: bold;
+            z-index: 1;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .news-badge.new {
+            background: linear-gradient(135deg, #27ae60 0%, #219653 100%);
+        }
+        
+        .news-badge.event {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .news-badge.sale {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        
+        .news-badge.tips {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+        }
+        
+        .news-image {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .news-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+        
+        .news-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-date {
+            color: var(--primary-red);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .news-date i {
+            font-size: 1.1rem;
+        }
+        
+        .news-card-title {
+            font-size: 1.6rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            line-height: 1.3;
+            transition: color 0.3s;
+        }
+        
+        .news-card:hover .news-card-title {
+            color: var(--primary-red);
+        }
+        
+        .news-excerpt {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .news-read-more {
+            color: var(--primary-red);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            padding: 8px 0;
+            width: fit-content;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .news-read-more:hover {
+            color: var(--dark-red);
+            gap: 15px;
+            border-bottom-color: var(--primary-red);
+        }
+        
+        .news-read-more i {
+            transition: transform 0.3s;
+        }
+        
+        .news-read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Баннер FAQ */
+        .faq-banner {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            margin: 60px 0;
+            box-shadow: 0 15px 35px rgba(211, 47, 47, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faq-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .faq-banner-icon {
+            font-size: 3.5rem;
+            margin-right: 30px;
+            min-width: 80px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .faq-banner-content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        
+        .faq-banner-content h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .faq-banner-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        /* Архив новостей */
+        .news-archive {
+            margin-bottom: 100px;
+        }
+        
+        .archive-title {
+            font-size: 2.2rem;
+            color: var(--dark-red);
+            margin-bottom: 40px;
+            text-align: center;
+            font-family: 'Brush Script MT', cursive;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .archive-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+        
+        .archive-list {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .archive-item {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--pale-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .archive-item:last-child {
+            border-bottom: none;
+        }
+        
+        .archive-item:hover {
+            background: linear-gradient(90deg, rgba(211, 47, 47, 0.05) 0%, rgba(211, 47, 47, 0.02) 100%);
+            padding-left: 35px;
+        }
+        
+        .archive-item-date {
+            color: var(--primary-red);
+            font-weight: 700;
+            min-width: 120px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .archive-item-date i {
+            font-size: 1rem;
+        }
+        
+        .archive-item-title {
+            color: var(--dark-gray);
+            flex-grow: 1;
+            margin: 0 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .archive-item-link {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: var(--border-radius-xl);
+            border: 2px solid var(--pale-red);
+            transition: all 0.3s;
+        }
+        
+        .archive-item-link:hover {
+            background: var(--btn-gradient);
+            color: white;
+            border-color: var(--primary-red);
+            transform: translateY(-2px);
+            box-shadow: var(--btn-shadow);
+        }
+        
+        /* Секция FAQ (Часто задаваемые вопросы) */
+        .faq-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(255, 240, 242, 0.9) 0%, rgba(255, 255, 255, 1) 100%);
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faq-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(211, 47, 47, 0.1) 0%, transparent 70%);
+        }
+        
+        .faq-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: var(--dark-red);
+            margin-bottom: 60px;
+            font-family: 'Brush Script MT', cursive;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .faq-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+        }
+        
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .faq-category-btn {
+            padding: 12px 28px;
+            background: white;
+            border: 2px solid var(--pale-red);
+            border-radius: var(--border-radius-xl);
+            color: var(--dark-gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .faq-category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+        
+        .faq-category-btn.active {
+            background: var(--btn-gradient);
+            color: white;
+            border-color: var(--primary-red);
+            box-shadow: var(--btn-shadow);
+        }
+        
+        .faq-search {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: 18px 25px 18px 60px;
+            border: 2px solid var(--pale-red);
+            border-radius: var(--border-radius-xl);
+            font-size: 1.1rem;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .faq-search input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.1);
+        }
+        
+        .faq-search i {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-red);
+            font-size: 1.3rem;
+        }
+        
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--pale-red);
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .faq-question:hover {
+            color: var(--primary-red);
+        }
+        
+        .faq-question i {
+            color: var(--primary-red);
+            font-size: 1.4rem;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease;
+        }
+        
+        .faq-answer.open {
+            padding: 0 30px 30px;
+            max-height: 1000px;
+        }
+        
+        .faq-answer-content {
+            color: var(--text-gray);
+            line-height: 1.7;
+            padding-top: 20px;
+            border-top: 1px solid var(--pale-red);
+            font-size: 1.1rem;
+        }
+        
+        .faq-answer-content ul,
+        .faq-answer-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 5px;
+        }
+        
+        .faq-answer-content li::before {
+            content: '•';
+            color: var(--primary-red);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .faq-help {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            border: 2px dashed var(--primary-red);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .faq-help h3 {
+            color: var(--dark-red);
+            margin-bottom: 15px;
+            font-size: 2rem;
+            font-family: 'Brush Script MT', cursive;
+        }
+        
+        .faq-help p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .faq-help-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Приветствие пользователя */
+        .welcome-user {
+            background: linear-gradient(135deg, rgba(255, 175, 183, 0.1) 0%, rgba(255, 205, 210, 0.2) 100%);
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            margin: 30px 20px 40px;
+            text-align: center;
+            border-left: 5px solid var(--primary-red);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .welcome-user h2 {
+            color: var(--dark-red);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            font-family: 'Brush Script MT', cursive;
+        }
+        
+        .welcome-user p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+        }
+        
+        /* Кнопка техподдержки */
+        .support-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--btn-gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+        
+        .support-button:hover {
+            background: var(--btn-hover-gradient);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(211, 47, 47, 0.4);
+        }
+        
+        .support-menu {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 280px;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+            border: 1px solid rgba(211, 47, 47, 0.15);
+        }
+        
+        .support-menu.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .support-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .support-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        
+        .support-items {
+            padding: 10px 0;
+        }
+        
+        .support-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .support-item:hover {
+            background-color: rgba(211, 47, 47, 0.05);
+            color: var(--primary-red);
+        }
+        
+        .support-item i {
+            width: 30px;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            text-align: center;
+            color: var(--primary-red);
+        }
+        
+        .support-divider {
+            height: 1px;
+            background-color: var(--pale-red);
+            margin: 10px 25px;
+        }
+        
+        /* Кнопка выхода */
+        .logout-btn {
+            background: transparent;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+            padding: 8px 20px;
+            border-radius: var(--border-radius-xl);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: var(--primary-red);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--btn-shadow);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .news-hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-outline {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .archive-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .archive-item-title {
+                margin: 10px 0;
+            }
+            
+            .faq-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            
+            .faq-banner-icon {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .faq-help-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .faq-help-buttons .btn-primary,
+            .faq-help-buttons .btn-outline {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .support-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+            }
+            
+            .support-button .support-text {
+                display: none;
+            }
+            
+            .support-menu {
+                bottom: 80px;
+                right: 20px;
+                width: 260px;
+            }
+        }
+        
+        /* Модальное окно для новости */
+        .news-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .news-modal-content {
+            background-color: white;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .news-modal-header {
+            padding: 25px 30px;
+            background: var(--btn-gradient);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .news-modal-title {
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .close-news-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .close-news-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .news-modal-body {
+            padding: 35px;
+        }
+        
+        .news-modal-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .news-modal-date {
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .news-modal-text {
+            color: var(--dark-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .news-modal-text p {
+            margin-bottom: 25px;
+        }
+        
+        .news-modal-text ul,
+        .news-modal-text ol {
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+        
+        .news-modal-text li {
+            margin-bottom: 12px;
+        }
+        
+        /* Уведомление */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-red);
+            color: white;
+            padding: 18px 30px;
+            border-radius: var(--border-radius-lg);
+            z-index: 3000;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+            transform: translateX(100px);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-main">
+                <div class="logo-section">
+                    <div class="logo-icon-wrapper">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1 class="logo-title">Цветничок у Оли</h1>
+                        <p class="logo-subtitle">Красивые цветы для вашего настроения</p>
+                    </div>
+                </div>
+                
+                <div class="header-contacts">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-info">
+                            <span class="contact-number">+375 25 530-99-49</span>
+                            <span class="contact-number">+375 33 623-94-33</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="contact-address">г.п. Вороново, ул. Аэродромная, д. 25</span>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="user-section">
+                        <span id="user-greeting"></span>
+                         <a href="login.html" id="logout" class="logout-btn">Выйти</a>
+                    </div>
+                    <a href="cart.html" class="cart-button" id="open-cart">
+                        <i class="fas fa-shopping-basket"></i>
+                        <span class="cart-badge" id="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="home.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Главная</span>
+                </a>
+                <a href="catalog.html" class="nav-link">
+                    <i class="fas fa-th-large"></i>
+                    <span>Каталог</span>
+                </a>
+                <a href="news.html" class="nav-link active">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Новости</span>
+                </a>
+                <a href="contacts.html" class="nav-link">
+                    <i class="fas fa-address-book"></i>
+                    <span>Контакты</span>
+                </a>
+                <a href="account.html" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Мой аккаунт</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Приветствие пользователя -->
+    <div class="welcome-user">
+        <h2 id="welcome-message">Новости цветочного мира</h2>
+        <p>Будьте в курсе последних событий, акций и полезных советов от Цветничка у Оли!</p>
+    </div>
+    
+    <!-- Герой-секция -->
+    <section class="news-hero">
+        <div class="news-hero-content">
+            <h1>Новости и события</h1>
+            <p>Узнавайте первыми о новинках, акциях и интересных событиях в мире цветов от Олечки!</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="scrollToNews()">
+                    <i class="fas fa-newspaper"></i> Смотреть новости
+                </button>
+                <button class="btn-outline" onclick="scrollToFaq()">
+                    <i class="fas fa-question-circle"></i> Частые вопросы
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Основной контент -->
+    <section class="news-section" id="news-section">
+        <h2 class="news-title">Последние новости</h2>
+        
+        <!-- Фильтры новостей -->
+        <div class="news-filters">
+            <button class="filter-btn active" data-filter="all">
+                <i class="fas fa-layer-group"></i> Все новости
+            </button>
+            <button class="filter-btn" data-filter="new">
+                <i class="fas fa-seedling"></i> Новинки
+            </button>
+            <button class="filter-btn" data-filter="sale">
+                <i class="fas fa-percentage"></i> Акции
+            </button>
+            <button class="filter-btn" data-filter="event">
+                <i class="fas fa-calendar-alt"></i> События
+            </button>
+            <button class="filter-btn" data-filter="tips">
+                <i class="fas fa-lightbulb"></i> Советы
+            </button>
+        </div>
+        
+        <!-- Сетка новостей -->
+        <div class="news-grid" id="news-grid">
+            <!-- Новости будут добавлены через JavaScript -->
+        </div>
+        
+        <!-- Баннер FAQ -->
+        <div class="faq-banner" id="faq-banner">
+            <div class="faq-banner-icon">
+                <i class="fas fa-question-circle"></i>
+            </div>
+            <div class="faq-banner-content">
+                <h3>Остались вопросы?</h3>
+                <p>Мы собрали ответы на самые частые вопросы наших клиентов. Возможно, здесь вы найдете то, что ищете!</p>
+                <button class="btn-primary" onclick="scrollToFaq()">
+                    <i class="fas fa-arrow-down"></i> Перейти к FAQ
+                </button>
+            </div>
+        </div>
+        
+        <!-- Архив новостей -->
+        <div class="news-archive">
+            <h2 class="archive-title">Архив новостей</h2>
+            <div class="archive-list" id="archive-list">
+                <!-- Архив будет добавлен через JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Секция FAQ (Часто задаваемые вопросы) -->
+    <section class="faq-section" id="faq-section">
+        <h2 class="faq-title">Часто задаваемые вопросы</h2>
+        <div class="faq-container">
+            <!-- Поиск по FAQ -->
+            <div class="faq-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="faq-search" placeholder="Поиск по вопросам...">
+            </div>
+            
+            <!-- Категории FAQ -->
+            <div class="faq-categories">
+                <button class="faq-category-btn active" data-category="all">
+                    <i class="fas fa-star"></i> Все вопросы
+                </button>
+                <button class="faq-category-btn" data-category="delivery">
+                    <i class="fas fa-truck"></i> Доставка
+                </button>
+                <button class="faq-category-btn" data-category="payment">
+                    <i class="fas fa-credit-card"></i> Оплата
+                </button>
+                <button class="faq-category-btn" data-category="flowers">
+                    <i class="fas fa-spa"></i> Цветы
+                </button>
+                <button class="faq-category-btn" data-category="care">
+                    <i class="fas fa-hand-holding-heart"></i> Уход
+                </button>
+                <button class="faq-category-btn" data-category="orders">
+                    <i class="fas fa-shopping-cart"></i> Заказы
+                </button>
+            </div>
+            
+            <!-- Аккордеон с вопросами -->
+            <div class="faq-accordion" id="faq-accordion">
+                <!-- FAQ элементы будут добавлены через JavaScript -->
+            </div>
+            
+            <!-- Помощь -->
+            <div class="faq-help">
+                <h3>Не нашли ответ на свой вопрос?</h3>
+                <p>Свяжитесь с нами любым удобным способом, и мы с радостью вам поможем!</p>
+                <div class="faq-help-buttons">
+                    <a href="tel:+375292105390" class="btn-outline">
+                        <i class="fas fa-phone"></i> Позвонить
+                    </a>
+                    <a href="contacts.html" class="btn-primary">
+                        <i class="fas fa-envelope"></i> Написать
+                    </a>
+                    <button class="btn-outline" onclick="document.getElementById('supportButton').click()">
+                        <i class="fas fa-headset"></i> Техподдержка
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Цветничок у Олечки</h3>
+                <p>Магазин цветов с душой. Мы создаем красивые цветы, которые дарят радость и выражают ваши чувства.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Магазин</h3>
+                <ul class="footer-links">
+                    <li><a href="catalog.html">Каталог букетов</a></li>
+                    <li><a href="#" onclick="scrollToNews(); return false;">Новости и акции</a></li>
+                    <li><a href="#promotions">Спецпредложения</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Помощь</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="scrollToFaq(); return false;">Частые вопросы</a></li>
+                    <li><a href="#">Доставка и оплата</a></li>
+                    <li><a href="#">Уход за цветами</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <p><i class="fas fa-map-marker-alt"></i> г.п. Вороново, ул. Аэродромная, д. 25</p>
+                <p><i class="fas fa-phone"></i> +375 25 530-99-49 / +375 (33) 623-94-33</p>
+                <p><i class="fas fa-envelope"></i> olgabalts@gmail.com / ilyabalt345ilya1@gmail.com</p>
+                <p><i class="fas fa-clock"></i> Ежедневно с 10:00 до 20:00</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Магазин цветов "Цветничок у Олечки". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для новости -->
+    <div class="news-modal" id="news-modal">
+        <div class="news-modal-content">
+            <div class="news-modal-header">
+                <h3 class="news-modal-title" id="modal-news-title"></h3>
+                <button class="close-news-modal" id="close-news-modal">&times;</button>
+            </div>
+            <div class="news-modal-body" id="modal-news-body">
+                <!-- Контент будет добавлен через JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Кнопка техподдержки -->
+    <button class="support-button" id="supportButton">
+        <i class="fas fa-headset"></i>
+        <span class="support-text">Техподдержка</span>
+    </button>
+
+    <!-- Меню техподдержки -->
+    <div class="support-menu" id="supportMenu">
+        <div class="support-header">
+            <h3>Служба поддержки</h3>
+        </div>
+        <div class="support-items">
+            <div class="support-item" onclick="openSupport('viber')">
+                <i class="fab fa-viber"></i>
+                <span>Viber: +375 29 210-53-90</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('telegram')">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram: +375 29 210-53-90</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('phone')">
+                <i class="fas fa-phone"></i>
+                <span>Позвонить: +375 29 210-53-90</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('email')">
+                <i class="fas fa-envelope"></i>
+                <span>Написать на почту</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('faq')">
+                <i class="fas fa-question-circle"></i>
+                <span>Частые вопросы</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Проверка авторизации
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            window.location.href = 'index.html';
+        }
+        
+        // Новости магазина
+        const newsData = [
+            {
+                id: 1,
+                title: "Новые весенние цветы уже в продаже!",
+                excerpt: "Встречайте весну с нашими новыми поступлениями: тюльпаны, нарциссы и гиацинты.",
+                content: "<p>Дорогие друзья! Спешим сообщить, что в нашем магазине появились первые весенние цветы. Мы привезли свежие тюльпаны разных сортов и расцветок, нежные нарциссы и ароматные гиацинты.</p><p>Каждый букет составлен с любовью и вниманием к деталям. Весенние цветы — это не только красиво, но и прекрасный способ поднять настроение после долгой зимы.</p><p>Приходите в наш магазин или заказывайте доставку — порадуйте себя и своих близких свежими весенними цветами!</p>",
+                image: "https://images.unsplash.com/photo-1495231916356-a86217efff12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "15.03.2026",
+                category: "new",
+                badge: "НОВОЕ"
+            },
+            {
+                id: 2,
+                title: "Скидка 15% на все букеты к 8 марта",
+                excerpt: "Специальное предложение к Международному женскому дню. Действует до 10 марта.",
+                content: "<p>В преддверии Международного женского дня мы подготовили специальную акцию для наших клиентов!</p><p>С 1 по 10 марта действует скидка 15% на все букеты в нашем магазине. Это прекрасная возможность порадовать мам, жен, подруг и коллег красивыми цветами по выгодной цене.</p><p>Акция распространяется как на готовые букеты, так и на индивидуальные заказы. Успейте сделать заказ заранее, чтобы получить скидку и гарантировать доставку к празднику.</p>",
+                image: "https://images.unsplash.com/photo-1557170339-0b0a576d1c8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "28.02.2026",
+                category: "sale",
+                badge: "АКЦИЯ"
+            },
+            {
+                id: 3,
+                title: "Мастер-класс по флористике от Олечки",
+                excerpt: "Приглашаем на бесплатный мастер-класс по созданию весенних композиций.",
+                content: "<p>Дорогие друзья! Олечка приглашает всех желающих на бесплатный мастер-класс по флористике, который состоится 25 марта в нашем магазине.</p><p>На мастер-классе вы научитесь:</p><ul><li>Выбирать и сочетать цветы</li><li>Создавать гармоничные композиции</li><li>Правильно ухаживать за срезанными цветами</li><li>Делать красивые упаковки для букетов</li></ul><p>Количество мест ограничено, поэтому записывайтесь заранее по телефону +375 25 530-99-49.</p>",
+                image: "https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "10.03.2026",
+                category: "event",
+                badge: "СОБЫТИЕ"
+            },
+            {
+                id: 4,
+                title: "Как продлить жизнь срезанным цветам",
+                excerpt: "Полезные советы от Олечки по уходу за цветами, чтобы они дольше радовали своей красотой.",
+                content: "<p>Многие задаются вопросом: как сделать так, чтобы срезанные цветы стояли как можно дольше? Олечка делится своими секретами:</p><ol><li><strong>Правильная подготовка</strong> — подрезайте стебли под углом 45 градусов перед тем, как поставить цветы в воду.</li><li><strong>Чистая вода</strong> — меняйте воду ежедневно и промывайте вазу.</li><li><strong>Удаление листьев</strong> — убирайте все листья, которые будут находиться под водой.</li><li><strong>Температурный режим</strong> — избегайте сквозняков и прямых солнечных лучей.</li><li><strong>Питание</strong> — используйте специальные добавки для цветов или добавляйте в воду немного сахара и лимонной кислоты.</li></ol><p>Следуя этим простым советам, ваши цветы будут радовать вас значительно дольше!</p>",
+                image: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "05.03.2026",
+                category: "tips",
+                badge: "СОВЕТ"
+            },
+            {
+                id: 5,
+                title: "Новая коллекция комнатных растений",
+                excerpt: "В нашем магазине появилась новая коллекция комнатных растений для вашего дома.",
+                content: "<p>Мы расширили ассортимент комнатных растений! Теперь в нашем магазине вы найдете не только срезанные цветы, но и разнообразные комнатные растения.</p><p>В новой коллекции представлены:</p><ul><li>Декоративно-лиственные растения (фикусы, монстеры, замиокулькасы)</li><li>Цветущие растения (орхидеи, спатифиллумы, антуриумы)</li><li>Суккуленты и кактусы</li><li>Травы для кухни (базилик, мята, розмарин)</li></ul><p>Все растения здоровые и ухоженные, привезены из проверенных питомников. Приходите выбирать зеленых друзей для вашего дома!</p>",
+                image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "20.02.2026",
+                category: "new",
+                badge: "НОВИНКА"
+            },
+            {
+                id: 6,
+                title: "День всех влюбленных: специальные предложения",
+                excerpt: "Романтические букеты и скидки для пар к 14 февраля.",
+                content: "<p>День Святого Валентина — прекрасный повод выразить свои чувства с помощью цветов. Мы подготовили специальные предложения к этому романтическому празднику:</p><p><strong>1. Готовые романтические букеты</strong> — классические красные розы, нежные пионы, экзотические орхидеи.</p><p><strong>2. Индивидуальные заказы</strong> — создадим букет по вашим пожеланиям и предпочтениям вашей второй половинки.</p><p><strong>3. Скидка 10%</strong> на все заказы, сделанные до 10 февраля.</p><p><strong>4. Бесплатная открытка</strong> с признанием в любви к каждому букету.</p><p>Заказывайте заранее, чтобы мы могли подготовить для вас самый красивый букет!</p>",
+                image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "01.02.2026",
+                category: "sale",
+                badge: "АКЦИЯ"
+            }
+        ];
+        
+        // Архив новостей (старые новости)
+        const archiveData = [
+            { id: 7, title: "Открытие нового филиала магазина", date: "15.01.2026" },
+            { id: 8, title: "Новогодняя распродажа горшечных растений", date: "20.12.2025" },
+            { id: 9, title: "Встреча с поставщиками из Голландии", date: "05.12.2025" },
+            { id: 10, title: "Осенняя коллекция хризантем", date: "10.10.2025" },
+            { id: 11, title: "Летняя акция: скидки на свадебные букеты", date: "01.06.2025" },
+            { id: 12, title: "Выставка цветов в Минске", date: "15.05.2025" }
+        ];
+        
+        // FAQ данные
+        const faqData = [
+            {
+                id: 1,
+                question: "Как происходит доставка цветов?",
+                answer: "<p>Мы осуществляем доставку по г.п. Вороново и ближайшим населенным пунктам в радиусе 20 км. Доставка выполняется курьером в согласованное с вами время.</p><p><strong>Стоимость доставки:</strong></p><ul><li>В пределах г.п. Вороново — 5 рублей</li><li>В радиусе 20 км от г.п. Вороново — 10 рублей</li><li>При заказе от 50 рублей — доставка бесплатно!</li></ul>",
+                category: "delivery"
+            },
+            {
+                id: 2,
+                question: "Какие способы оплаты вы принимаете?",
+                answer: "<p>Мы предлагаем несколько удобных способов оплаты:</p><ol><li><strong>Наличными курьеру</strong> при получении заказа</li><li><strong>Банковской картой</strong> через терминал у курьера</li><li><strong>Онлайн-оплата</strong> на сайте через систему ЕРИП</li><li><strong>Перечисление</strong> на карту банка</li></ol><p>Все платежи защищены и конфиденциальны.</p>",
+                category: "payment"
+            },
+            {
+                id: 3,
+                question: "Как долго цветы сохраняют свежесть?",
+                answer: "<p>Срок свежести цветов зависит от их вида и правильного ухода:</p><ul><li>Розы — 7-10 дней</li><li>Тюльпаны — 5-7 дней</li><li>Хризантемы — 10-14 дней</li><li>Орхидеи — 14-21 день</li><li>Герберы — 7-10 дней</li></ul><p>Мы используем специальные средства для продления жизни цветов и даем подробные инструкции по уходу с каждым букетом.</p>",
+                category: "flowers"
+            },
+            {
+                id: 4,
+                question: "Можно ли заказать букет по индивидуальному дизайну?",
+                answer: "<p>Конечно! Олечка с удовольствием создаст для вас уникальный букет по вашим пожеланиям. Для этого:</p><ol><li>Свяжитесь с нами по телефону или через WhatsApp</li><li>Опишите ваши предпочтения (цвета, стиль, бюджет)</li><li>Пришлите фото-пример, если есть</li><li>Мы предложим несколько вариантов и согласуем детали</li></ol><p>Индивидуальные заказы принимаются за 2-3 дня до нужной даты.</p>",
+                category: "orders"
+            },
+            {
+                id: 5,
+                question: "Как ухаживать за срезанными цветами, чтобы они дольше стояли?",
+                answer: "<p>Следуйте этим простым правилам:</p><ul><li>Подрежьте стебли под углом 45° перед тем, как поставить цветы в воду</li><li>Используйте чистую вазу и свежую воду комнатной температуры</li><li>Удалите все листья, которые будут находиться под водой</li><li>Добавьте в воду специальную подкормку для цветов (мы даем ее бесплатно с каждым букетом)</li><li>Меняйте воду каждые 2 дня, промывая вазу и подрезая стебли</li><li>Держите букет подальше от прямых солнечных лучей, отопительных приборов и сквозняков</li></ul>",
+                category: "care"
+            },
+            {
+                id: 6,
+                question: "Можно ли заказать доставку цветов в определенное время?",
+                answer: "<p>Да, мы доставляем цветы в удобное для вас время. При оформлении заказа вы можете указать желаемый временной интервал доставки:</p><ul><li>Утром: с 10:00 до 13:00</li><li>Днем: с 13:00 до 17:00</li><li>Вечером: с 17:00 до 20:00</li></ul><p>Для срочной доставки в течение 2-х часов доступна услуга экспресс-доставки (дополнительная плата 5 рублей).</p>",
+                category: "delivery"
+            },
+            {
+                id: 7,
+                question: "Что делать, если я хочу отправить цветы анонимно?",
+                answer: "<p>Мы можем организовать анонимную доставку цветов. При оформлении заказа:</p><ol><li>Сообщите нашему менеджеру, что хотите анонимную доставку</li><li>Мы не будем называть ваше имя при доставке</li><li>Вы можете написать пожелание на открытке без подписи или с псевдонимом</li><li>В накладных и документах ваши данные будут конфиденциальны</li></ol><p>Ваша тайна будет сохранена!</p>",
+                category: "orders"
+            },
+            {
+                id: 8,
+                question: "Есть ли у вас подарочные сертификаты?",
+                answer: "<p>Да, мы предлагаем подарочные сертификаты на любую сумму от 20 до 200 рублей. Сертификаты можно приобрести:</p><ul><li>В нашем магазине по адресу г.п. Вороново, ул. Аэродромная, д. 25</li><li>Оформить онлайн с доставкой</li><li>Заказать по телефону с курьерской доставкой</li></ul><p>Сертификат действителен в течение 6 месяцев с момента покупки. Это отличный подарок для ваших близких!</p>",
+                category: "payment"
+            },
+            {
+                id: 9,
+                question: "Как выбрать цветы для конкретного случая?",
+                answer: "<p>Мы поможем вам с выбором! Вот наши рекомендации:</p><ul><li><strong>День рождения</strong> — яркие смешанные букеты, солнечные цветы</li><li><strong>Свадьба</strong> — нежные пастельные оттенки, розы, пионы</li><li><strong>8 Марта</strong> — тюльпаны, мимозы, весенние композиции</li><li><strong>14 февраля</strong> — красные розы, романтические букеты</li><li><strong>Соболезнования</strong> — строгие букеты в темных тонах</li><li><strong>Просто так</strong> — сезонные цветы, полевые композиции</li></ul><p>Позвоните нам, и мы подберем идеальный вариант!</p>",
+                category: "flowers"
+            },
+            {
+                id: 10,
+                question: "Что делать, если полученный букет отличается от заказанного?",
+                answer: "<p>Качество и соответствие заказу — наш приоритет. Если вы столкнулись с проблемой:</p><ol><li>Сразу свяжитесь с нами по телефону +375 25 530-99-49</li><li>Опишите ситуацию и, если возможно, пришлите фото</li><li>Мы оперативно решим вопрос: заменим букет, вернем деньги или предложим компенсацию</li></ol><p>Мы ценим каждого клиента и делаем всё возможное, чтобы вы остались довольны!</p>",
+                category: "orders"
+            }
+        ];
+        
+        // Корзина
+        let cart = JSON.parse(localStorage.getItem('flowerCart')) || [];
+        
+        // Когда страница загрузилась
+        document.addEventListener('DOMContentLoaded', function() {
+            // Показываем имя пользователя
+            if (currentUser) {
+                const greetingElement = document.getElementById('user-greeting');
+                const welcomeElement = document.getElementById('welcome-message');
+                
+                if (greetingElement) {
+                    greetingElement.textContent = `Привет, ${currentUser.name}!`;
+                }
+                if (welcomeElement) {
+                    welcomeElement.textContent = `Новости цветочного мира, ${currentUser.name}!`;
+                }
+            }
+            
+            // Показываем новости
+            showNews('all');
+            
+            // Показываем архив
+            showArchive();
+            
+            // Показываем FAQ
+            showFaq('all');
+            
+            // Обновляем корзину
+            updateCartCount();
+            
+            // Настраиваем кнопки
+            setupButtons();
+            
+            // Настраиваем фильтры
+            setupFilters();
+            
+            // Настраиваем FAQ
+            setupFaq();
+            
+            // Настраиваем техподдержку
+            setupSupportButton();
+        });
+        
+        // Показать новости
+        function showNews(filter = 'all') {
+            const container = document.getElementById('news-grid');
+            if (!container) return;
+            
+            // Фильтруем новости
+            let filteredNews = newsData;
+            if (filter !== 'all') {
+                filteredNews = newsData.filter(news => news.category === filter);
+            }
+            
+            // Сортируем по дате (сначала новые)
+            filteredNews.sort((a, b) => {
+                const dateA = parseDate(a.date);
+                const dateB = parseDate(b.date);
+                return dateB - dateA;
+            });
+            
+            let html = '';
+            
+            filteredNews.forEach(news => {
+                html += `
+                <div class="news-card" data-category="${news.category}">
+                    <div class="news-badge ${news.category}">${news.badge}</div>
+                    <div class="news-image">
+                        <img src="${news.image}" alt="${news.title}" onerror="this.src='https://via.placeholder.com/400x300?text=Новость'">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">
+                            <i class="far fa-calendar-alt"></i>
+                            ${news.date}
+                        </div>
+                        <h3 class="news-card-title">${news.title}</h3>
+                        <p class="news-excerpt">${news.excerpt}</p>
+                        <a href="#" class="news-read-more" onclick="openNewsModal(${news.id}); return false;">
+                            Читать далее
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Показать архив
+        function showArchive() {
+            const container = document.getElementById('archive-list');
+            if (!container) return;
+            
+            let html = '';
+            
+            archiveData.forEach(item => {
+                html += `
+                <div class="archive-item">
+                    <div class="archive-item-date">
+                        <i class="far fa-calendar-alt"></i>
+                        ${item.date}
+                    </div>
+                    <div class="archive-item-title">${item.title}</div>
+                    <a href="#" class="archive-item-link" onclick="openArchiveNews(${item.id}); return false;">
+                        Открыть
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Показать FAQ
+        function showFaq(category = 'all', searchTerm = '') {
+            const container = document.getElementById('faq-accordion');
+            if (!container) return;
+            
+            // Фильтруем FAQ
+            let filteredFaq = faqData;
+            
+            // Фильтр по категории
+            if (category !== 'all') {
+                filteredFaq = filteredFaq.filter(item => item.category === category);
+            }
+            
+            // Фильтр по поиску
+            if (searchTerm) {
+                const term = searchTerm.toLowerCase();
+                filteredFaq = filteredFaq.filter(item => 
+                    item.question.toLowerCase().includes(term) || 
+                    item.answer.toLowerCase().includes(term)
+                );
+            }
+            
+            let html = '';
+            
+            if (filteredFaq.length === 0) {
+                html = `
+                <div class="faq-item" style="text-align: center; padding: 40px;">
+                    <h3 style="color: var(--dark-red); margin-bottom: 15px;">Вопросы не найдены</h3>
+                    <p style="color: var(--text-gray);">Попробуйте изменить поисковый запрос или выбрать другую категорию.</p>
+                </div>
+                `;
+            } else {
+                filteredFaq.forEach(item => {
+                    html += `
+                    <div class="faq-item" data-category="${item.category}">
+                        <div class="faq-question" onclick="toggleFaqAnswer(${item.id})">
+                            <span>${item.question}</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" id="faq-answer-${item.id}">
+                            <div class="faq-answer-content">
+                                ${item.answer}
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // Открыть модальное окно с новостью
+        window.openNewsModal = function(newsId) {
+            const news = newsData.find(n => n.id === newsId);
+            if (!news) return;
+            
+            const modal = document.getElementById('news-modal');
+            const title = document.getElementById('modal-news-title');
+            const body = document.getElementById('modal-news-body');
+            
+            if (!modal || !title || !body) return;
+            
+            title.textContent = news.title;
+            
+            body.innerHTML = `
+                <div class="news-modal-date">
+                    <i class="far fa-calendar-alt"></i>
+                    ${news.date}
+                </div>
+                <img src="${news.image}" alt="${news.title}" class="news-modal-image" onerror="this.src='https://via.placeholder.com/800x400?text=Новость'">
+                <div class="news-modal-text">
+                    ${news.content}
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        };
+        
+        // Открыть архивную новость
+        window.openArchiveNews = function(newsId) {
+            showMessage(`Новость #${newsId} из архива. Детали будут добавлены позже.`, 'info');
+        };
+        
+        // Переключить ответ FAQ
+        window.toggleFaqAnswer = function(faqId) {
+            const answer = document.getElementById(`faq-answer-${faqId}`);
+            const question = answer.previousElementSibling;
+            
+            if (answer.classList.contains('open')) {
+                answer.classList.remove('open');
+                question.classList.remove('active');
+            } else {
+                // Закрыть все остальные ответы
+                document.querySelectorAll('.faq-answer.open').forEach(item => {
+                    item.classList.remove('open');
+                    item.previousElementSibling.classList.remove('active');
+                });
+                
+                // Открыть текущий
+                answer.classList.add('open');
+                question.classList.add('active');
+            }
+        };
+        
+        // Прокрутить к новостям
+        window.scrollToNews = function() {
+            const newsSection = document.getElementById('news-section');
+            if (newsSection) {
+                newsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+        
+        // Прокрутить к FAQ
+        window.scrollToFaq = function() {
+            const faqSection = document.getElementById('faq-section');
+            if (faqSection) {
+                faqSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+        
+        // Парсинг даты из строки
+        function parseDate(dateString) {
+            const parts = dateString.split('.');
+            return new Date(parts[2], parts[1] - 1, parts[0]);
+        }
+        
+        // Настроить фильтры новостей
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
+                    showNews(filter);
+                });
+            });
+        }
+        
+        // Настроить FAQ
+        function setupFaq() {
+            const categoryButtons = document.querySelectorAll('.faq-category-btn');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.getAttribute('data-category');
+                    const searchInput = document.getElementById('faq-search');
+                    const searchTerm = searchInput ? searchInput.value : '';
+                    showFaq(category, searchTerm);
+                });
+            });
+            
+            const searchInput = document.getElementById('faq-search');
+            if (searchInput) {
+                let searchTimeout;
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        const activeCategory = document.querySelector('.faq-category-btn.active');
+                        const category = activeCategory ? activeCategory.getAttribute('data-category') : 'all';
+                        showFaq(category, this.value);
+                    }, 300);
+                });
+            }
+        }
+        
+        // Настроить техподдержку
+        function setupSupportButton() {
+            const supportButton = document.getElementById('supportButton');
+            const supportMenu = document.getElementById('supportMenu');
+            
+            if (supportButton && supportMenu) {
+                supportButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    supportMenu.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!supportMenu.contains(e.target) && !supportButton.contains(e.target)) {
+                        supportMenu.classList.remove('active');
+                    }
+                });
+                
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        supportMenu.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        // Глобальная функция открытия техподдержки
+        window.openSupport = function(type) {
+            let link = '';
+            switch(type) {
+                case 'viber':
+                    link = 'viber://chat?number=%2B375292105390';
+                    window.location.href = link;
+                    break;
+                case 'telegram':
+                    link = 'https://t.me/+375292105390';
+                    window.open(link, '_blank');
+                    break;
+                case 'phone':
+                    link = 'tel:+375292105390';
+                    window.location.href = link;
+                    break;
+                case 'email':
+                    link = 'mailto:ilyabalt345ilya1@gmail.com?subject=Вопрос%20по%20заказу&body=Здравствуйте!%20У%20меня%20вопрос%20по%20заказу...';
+                    window.location.href = link;
+                    break;
+                case 'faq':
+                    scrollToFaq();
+                    break;
+            }
+            document.getElementById('supportMenu').classList.remove('active');
+        };
+        
+        // Обновить счетчик корзины
+        function updateCartCount() {
+            const countElement = document.getElementById('cart-count');
+            if (!countElement) return;
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            countElement.textContent = total;
+        }
+        
+        // Показать сообщение
+        function showMessage(text, type = 'success') {
+            let notification = document.getElementById('notification');
+            if (!notification) return;
+            
+            notification.textContent = text;
+            notification.style.display = 'block';
+            notification.style.background = type === 'success' ? 'var(--primary-red)' : '#3498db';
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 10);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100px)';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 500);
+            }, 3000);
+        }
+        
+        // Настроить кнопки
+        function setupButtons() {
+            const logoutBtn = document.getElementById('logout');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('currentUser');
+                    window.location.href = 'index.html';
+                });
+            }
+            
+            const closeModalBtn = document.getElementById('close-news-modal');
+            const modal = document.getElementById('news-modal');
+            
+            if (closeModalBtn && modal) {
+                closeModalBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+                
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && modal.style.display === 'block') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

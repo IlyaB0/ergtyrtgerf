@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветнечёк у Олечки | Вход</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для страницы входа */
+        body {
+            background: linear-gradient(rgba(255, 255, 255, 0.125), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 40px 20px;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        
+        .welcome-title {
+            color: var(--dark-red);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-family: 'Brush Script MT', cursive;
+        }
+        
+        .welcome-text {
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-page {
+            display: none;
+        }
+        
+        .form-page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .message.success {
+            background-color: #e8f7ee;
+            color: #2d8f58;
+            border: 1px solid #b8e6cf;
+            display: block;
+        }
+        
+        .message.error {
+            background-color: #fdeaea;
+            color: #d33c40;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        /* Стили для кнопки "Войти гостем" */
+        .guest-login-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--pale-red);
+            text-align: center;
+        }
+        
+        .guest-login-title {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .guest-login-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #f8f9fa;
+            color: var(--dark-gray);
+            border: 2px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .guest-login-btn:hover {
+            background-color: var(--pale-red);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .guest-login-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .guest-login-note {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        
+        /* Стили для разделителя */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--text-gray);
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--medium-gray);
+        }
+        
+        .divider-text {
+            padding: 0 15px;
+            font-size: 0.9rem;
+        }
+        
+        /* Стили для преимуществ гостевого доступа */
+        .guest-benefits {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--primary-red);
+        }
+        
+        .guest-benefits h4 {
+            color: var(--dark-red);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .guest-benefits ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        
+        .guest-benefits li {
+            padding: 5px 0;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .guest-benefits li i {
+            color: var(--primary-red);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Главный контейнер -->
+    <div class="login-container">
+        <div>
+            <div class="welcome-message">
+                <h1 class="welcome-title">Цветничок у Олечки</h1>
+                <p class="welcome-text">Добро пожаловать в магазин цветов! Начните покупки прямо сейчас</p>
+            </div>
+            
+            <div class="form-container">
+                <!-- Сообщения -->
+                <div id="message" class="message"></div>
+                
+                <!-- Форма входа -->
+                <div id="login-form" class="form-page active">
+                    <h2 class="form-title">Вход в аккаунт</h2>
+                    <p class="form-subtitle">Введите свои данные для входа</p>
+                    
+                    <form class="form" id="loginForm">
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="login-email" placeholder="Ваш email" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="Ваш пароль" required>
+                        </div>
+                        
+                        <div class="remember-forgot">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Запомнить меня</label>
+                            </div>
+                            <a href="#" class="forgot-password" id="forgot-password">Забыли пароль?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                    </form>
+                    
+                    <!-- Разделитель -->
+                    <div class="divider">
+                        <span class="divider-text">или</span>
+                    </div>
+                    
+                    <!-- Кнопка "Войти гостем" -->
+                    <div class="guest-login-section">
+                        <button class="guest-login-btn" id="guest-login-btn">
+                            <i class="fas fa-user-clock"></i>
+                            Войти гостем
+                        </button>
+                        <p class="guest-login-note">
+                            Без регистрации. Вы сможете просматривать каталог, добавлять товары в корзину, 
+                            а войти в аккаунт можно будет позже.
+                        </p>
+                    </div>
+                    
+                    <!-- Преимущества гостевого доступа -->
+                    <div class="guest-benefits">
+                        <h4>Что можно делать как гость:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Просматривать каталог товаров</li>
+                            <li><i class="fas fa-check"></i> Добавлять товары в корзину</li>
+                            <li><i class="fas fa-check"></i> Оформлять заказы (после входа)</li>
+                            <li><i class="fas fa-check"></i> Читать новости и акции</li>
+                            <li><i class="fas fa-check"></i> Смотреть контакты магазина</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-switch">
+                        Нет аккаунта? <a id="show-register">Зарегистрироваться</a>
+                    </div>
+                </div>
+                
+                <!-- Форма регистрации -->
+                <div id="register-form" class="form-page">
+                    <h2 class="form-title">Регистрация</h2>
+                    <p class="form-subtitle">Создайте новый аккаунт</p>
+                    
+                    <form class="form" id="registerForm">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="register-name" placeholder="Ваше имя" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="register-email" placeholder="Ваш email" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="register-phone" placeholder="Ваш телефон">
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" placeholder="Пароль (минимум 6 символов)" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-confirm-password" placeholder="Подтвердите пароль" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <input type="checkbox" id="agree-terms" required>
+                            <label for="agree-terms" style="margin-left: 10px; font-size: 0.9rem;">
+                                Я соглашаюсь с условиями использования и политикой конфиденциальности
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                    </form>
+                    
+                    <!-- Разделитель -->
+                    <div class="divider">
+                        <span class="divider-text">или</span>
+                    </div>
+                    
+                    <!-- Кнопка "Войти гостем" в форме регистрации -->
+                    <div class="guest-login-section">
+                        <button class="guest-login-btn" id="guest-login-btn-register">
+                            <i class="fas fa-user-clock"></i>
+                            Продолжить как гость
+                        </button>
+                        <p class="guest-login-note">
+                            Не хотите регистрироваться сейчас? Начните покупки как гость, 
+                            а аккаунт создадите позже.
+                        </p>
+                    </div>
+                    
+                    <div class="form-switch">
+                        Уже есть аккаунт? <a id="show-login">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Цветнечёк у Олечки</h3>
+                <p>Магазин цветов с душой. Мы создаем красивые цветы, которые дарят радость и выражают ваши чувства.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <p><i class="fas fa-map-marker-alt"></i> г.п. Вороново, ул. Аэродромная, д. 25</p>
+                <p><i class="fas fa-phone"></i> +375 25 530-99-49 / +375 (33) 623-94-33</p>
+                <p><i class="fas fa-envelope"></i>olgabalts@gmail.com | ilyabalt345ilya1@gmail.com </p>
+                <p><i class="fas fa-clock"></i> Ежедневно с 10:00 до 20:00</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Магазин цветов "Цветнечёк у Олечки". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+
+
+// Стало:
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+// Перенаправляем только если пользователь НЕ гость
+if (currentUser && !currentUser.isGuest) {
+    window.location.href = 'home.html';
+}
+        
+        // Переключение между формами входа и регистрации
+        document.getElementById('show-register').addEventListener('click', function() {
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('register-form').classList.add('active');
+            document.getElementById('message').style.display = 'none';
+        });
+        
+        document.getElementById('show-login').addEventListener('click', function() {
+            document.getElementById('register-form').classList.remove('active');
+            document.getElementById('login-form').classList.add('active');
+            document.getElementById('message').style.display = 'none';
+        });
+        
+        // Обработка формы входа
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            // Простая валидация
+            if (!email || !password) {
+                showMessage('Пожалуйста, заполните все поля', 'error');
+                return;
+            }
+            
+            // Проверка на тестовый аккаунт
+            if (email === 'demo@example.com' && password === 'demo123') {
+                const demoUser = {
+                    name: "Демо Пользователь",
+                    email: email,
+                    phone: "+7 (999) 123-45-67",
+                    registrationDate: new Date().toISOString().split('T')[0],
+                    isDemo: true
+                };
+                
+                localStorage.setItem('currentUser', JSON.stringify(demoUser));
+                showMessage('Вход выполнен успешно! Перенаправляем...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+                return;
+            }
+            
+            // Проверяем, есть ли такой пользователь в localStorage
+            const users = JSON.parse(localStorage.getItem('flowerShopUsers')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Не сохраняем пароль в текущем пользователе
+                const { password, ...userWithoutPassword } = user;
+                localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
+                
+                if (remember) {
+                    localStorage.setItem('rememberedEmail', email);
+                }
+                
+                showMessage(`Добро пожаловать, ${user.name}! Перенаправляем...`, 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+            } else {
+                showMessage('Неверный email или пароль', 'error');
+            }
+        });
+        
+        // Обработка формы регистрации
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const phone = document.getElementById('register-phone').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            
+            // Валидация
+            if (!name || !email || !password || !confirmPassword) {
+                showMessage('Пожалуйста, заполните все обязательные поля', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage('Пароли не совпадают', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showMessage('Пароль должен содержать не менее 6 символов', 'error');
+                return;
+            }
+            
+            // Проверяем, не зарегистрирован ли уже такой email
+            const users = JSON.parse(localStorage.getItem('flowerShopUsers')) || [];
+            const userExists = users.some(user => user.email === email);
+            
+            if (userExists) {
+                showMessage('Пользователь с таким email уже зарегистрирован', 'error');
+                return;
+            }
+            
+            // Создаем нового пользователя
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                phone: phone || '',
+                password,
+                registrationDate: new Date().toISOString().split('T')[0],
+                totalBonuses: 0,
+                orders: [],
+                bonusHistory: [],
+                favorites: []
+            };
+            
+            // Сохраняем в localStorage
+            users.push(newUser);
+            localStorage.setItem('flowerShopUsers', JSON.stringify(users));
+            
+            // Сохраняем текущего пользователя (без пароля)
+            const { password: _, ...userWithoutPassword } = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
+            
+            showMessage(`Регистрация прошла успешно! Добро пожаловать, ${name}!`, 'success');
+            
+            // Перенаправляем на главную страницу
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1500);
+        });
+        
+        // Обработка входа как гость
+        function loginAsGuest() {
+            // Создаем гостевого пользователя
+            const guestUser = {
+                name: "Гость",
+                email: null,
+                isGuest: true,
+                guestId: 'guest_' + Date.now(),
+                registrationDate: new Date().toISOString().split('T')[0]
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(guestUser));
+            
+            showMessage('Добро пожаловать как гость! Перенаправляем в магазин...', 'success');
+            
+            // Перенаправляем на главную страницу
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1000);
+        }
+        
+        // Обработчики для кнопок "Войти гостем"
+        document.getElementById('guest-login-btn').addEventListener('click', function() {
+            loginAsGuest();
+        });
+        
+        document.getElementById('guest-login-btn-register').addEventListener('click', function() {
+            loginAsGuest();
+        });
+        
+        // Забыли пароль
+        document.getElementById('forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = prompt('Введите ваш email для восстановления пароля:');
+            if (email) {
+                showMessage('Инструкция по восстановлению пароля отправлена на ' + email, 'success');
+            }
+        });
+        
+        // Функция показа сообщений
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            
+            // Автоматическое скрытие сообщения
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Заполнение запомненного email
+        window.addEventListener('DOMContentLoaded', function() {
+            const rememberedEmail = localStorage.getItem('rememberedEmail');
+            if (rememberedEmail) {
+                document.getElementById('login-email').value = rememberedEmail;
+                document.getElementById('remember').checked = true;
+            }
+            
+            // Автоматический фокус на поле email
+            document.getElementById('login-email').focus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Цветничок у Оли | Главная</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Специфичные стили для главной страницы */
+        :root {
+            --primary-red: #d32f2f;
+            --dark-red: #b71c1c;
+            --pale-red: #ffebee;
+            --white: #ffffff;
+            --dark-gray: #333333;
+            --text-gray: #666666;
+            --shadow: 0 5px 15px rgba(0,0,0,0.05);
+            --border-radius: 8px;
+        }
+        
+        .logout-btn {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            color: var(--dark-red);
+            text-decoration: underline;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .section, .hero, .discount-section {
+            flex: 1;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--dark-red);
+            margin-bottom: 50px;
+            font-family: 'Brush Script MT', cursive;
+        }
+        
+        .discount-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .discount-container {
+            text-align: center;
+            background: linear-gradient(145deg, #2ecc71, #27ae60);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3);
+            border: 5px solid white;
+            position: relative;
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transform: rotate(5deg);
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+            z-index: 3;
+        }
+        
+        .discount-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .discount-percent {
+            color: #fff;
+            font-size: 100px;
+            font-weight: 900;
+            margin: 10px 0;
+            position: relative;
+            z-index: 2;
+            text-shadow: 3px 3px 0 #27ae60, 6px 6px 0 rgba(0,0,0,0.1);
+            line-height: 1;
+        }
+        
+        .discount-percent::after {
+            content: '%';
+            font-size: 50px;
+            vertical-align: super;
+            margin-left: -10px;
+        }
+        
+        .discount-subtitle {
+            color: #e8f8ef;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+        
+        .discount-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .discount-container:hover {
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3), 0 0 20px rgba(46, 204, 113, 0.5); }
+            to { box-shadow: 0 10px 40px rgba(46, 204, 113, 0.5), 0 0 30px rgba(46, 204, 113, 0.8); }
+        }
+        
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+            border: 1px solid var(--pale-red);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .product-favorite {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            color: #ccc;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .product-favorite:hover,
+        .product-favorite.active {
+            color: var(--primary-red);
+            transform: scale(1.1);
+        }
+        
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+            height: 50px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .product-description {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 15px;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+        
+        .current-price {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.1rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-red);
+        }
+        
+        .btn-details {
+            padding: 10px 15px;
+            background-color: transparent;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .btn-details:hover {
+            background-color: var(--pale-red);
+        }
+        
+        .welcome-user {
+            background-color: var(--pale-red);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 20px 40px;
+            text-align: center;
+            border-left: 5px solid var(--primary-red);
+        }
+        
+        .welcome-user h2 {
+            color: var(--dark-red);
+            margin-bottom: 10px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--pale-red);
+            transition: transform 0.3s;
+            border: 1px solid rgba(211, 47, 47, 0.1);
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+        
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .review-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--pale-red);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .review-info h4 {
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+        }
+        
+        .review-rating {
+            color: #ffc107;
+        }
+        
+        /* Кнопка техподдержки */
+        .support-button {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 5px 20px rgba(211, 47, 47, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid white;
+        }
+        
+        .support-button:hover {
+            background: var(--dark-red);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(183, 28, 28, 0.5);
+        }
+        
+        .support-button i {
+            font-size: 20px;
+        }
+        
+        .support-text {
+            display: inline;
+        }
+        
+        .support-menu {
+            position: fixed;
+            bottom: 110px;
+            right: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 9998;
+            display: none;
+            width: 260px;
+            overflow: hidden;
+            border: 1px solid var(--pale-red);
+        }
+        
+        .support-menu.active {
+            display: block;
+        }
+        
+        .support-header {
+            background: var(--primary-red);
+            color: white;
+            padding: 15px 20px;
+        }
+        
+        .support-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .support-items {
+            padding: 10px;
+        }
+        
+        .support-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .support-item:hover {
+            background: var(--pale-red);
+            color: var(--primary-red);
+        }
+        
+        .support-item i {
+            width: 20px;
+            text-align: center;
+            color: var(--primary-red);
+            font-size: 1.1rem;
+        }
+        
+        .support-divider {
+            height: 1px;
+            background: #eee;
+            margin: 8px 0;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-red);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            z-index: 10000;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @media screen and (max-width: 992px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .showcase-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .section { padding: 40px 15px; }
+            .section-title { font-size: 1.8rem; margin-bottom: 30px; }
+            .hero { padding: 60px 15px; margin-bottom: 30px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+            .showcase-grid { grid-template-columns: 1fr; gap: 15px; }
+            .features { grid-template-columns: 1fr; gap: 20px; }
+            .reviews { grid-template-columns: 1fr; gap: 20px; }
+            .support-button { bottom: 20px; right: 15px; padding: 12px 20px; font-size: 14px; }
+            .support-menu { bottom: 90px; right: 15px; width: 240px; }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .hero h1 { font-size: 1.5rem; }
+            .support-button { bottom: 15px; right: 15px; padding: 10px 18px; font-size: 13px; }
+            .support-menu { bottom: 80px; right: 15px; width: 220px; }
+        }
+    </style>
+</head>
+<body>
+    
+<!-- Шапка сайта -->
+<header class="header">
+    <div class="header-container">
+        <div class="header-main">
+            <div class="logo-section">
+                <div class="logo-icon-wrapper">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <div class="logo-text">
+                    <h1 class="logo-title">Цветничок у Оли</h1>
+                    <p class="logo-subtitle">Красивые цветы для вашего настроения</p>
+                </div>
+            </div>
+            
+            <div class="header-contacts">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="contact-info">
+                        <span class="contact-number">+375 25 530-99-49</span>
+                        <span class="contact-number">+375 33 623-94-33</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="contact-address">г.п. Вороново, ул. Аэродромная, д. 25</span>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <div class="user-section">
+                    <span id="user-greeting"></span>
+                    <a href="javascript:void(0)" id="logout" class="logout-btn">Выйти</a>
+                </div>
+                <a href="cart.html" class="cart-button" id="open-cart">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <a href="home.html" class="nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Главная</span>
+            </a>
+            <a href="catalog.html" class="nav-link">
+                <i class="fas fa-th-large"></i>
+                <span>Каталог</span>
+            </a>
+            <a href="contacts.html" class="nav-link">
+                <i class="fas fa-address-book"></i>
+                <span>Контакты</span>
+            </a>
+            <a href="account.html" class="nav-link">
+                <i class="fas fa-user"></i>
+                <span>Мой аккаунт</span>
+            </a>
+            <a href="news.html" class="nav-link">
+                <i class="fas fa-newspaper"></i>
+                <span>Новости</span>
+            </a>
+        </nav>
+    </div>
+</header>
+
+    <!-- Приветствие пользователя -->
+    <div class="welcome-user">
+        <h2 id="welcome-message">Добро пожаловать!</h2>
+    </div>
+    
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Цветы, которые говорят о любви</h1>
+            <p>Эксклюзивные цветы от Олечки. Доставка по Вороновскому району в течение 2 суток.</p>
+            <a href="catalog.html" class="btn btn-primary">Выбрать букет</a>
+            <a href="#promotions" class="btn btn-secondary">Акции</a>
+        </div>
+    </section>
+
+    <!-- АКЦИЯ Скидка при самовывозе -->
+    <section class="discount-section">
+        <div class="discount-container">
+            <div class="discount-badge">АКЦИЯ</div>
+            <div class="discount-title">СКИДКА ПРИ САМОВЫВОЗЕ</div>
+            <div class="discount-percent">30</div>
+            <div class="discount-subtitle">Заберите заказ самостоятельно и получите скидку!</div>
+        </div>
+    </section>
+    
+    <!-- Акционные товары -->
+    <section class="section" id="promotions">
+        <h2 class="section-title">Акционные предложения</h2>
+        <div class="showcase-grid" id="promotional-products"></div>
+    </section>
+    
+    <!-- Новинки сезона -->
+    <section class="section">
+        <h2 class="section-title">Новинки сезона</h2>
+        <div class="showcase-grid" id="new-season-products"></div>
+    </section>
+    
+    <!-- Преимущества -->
+    <section class="section">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                <h3 class="feature-title">Свежие цветы</h3>
+                <p>Мы работаем с цветами уже больше 8 лет, поэтому наши цветы всегда свежие и долго радуют своей красотой.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                <h3 class="feature-title">Быстрая доставка</h3>
+                <p>Доставляем букеты в течение 2 суток по Вороновскому району. Работаем 7 дней в неделю.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-award"></i></div>
+                <h3 class="feature-title">Опытная Олечка</h3>
+                <p>Олечка - занимается цветами уже более 8 лет. Каждый цветок создается с любовью и вниманием к деталям.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-heart"></i></div>
+                <h3 class="feature-title">Подход к цветам</h3>
+                <p>Выращиваем цветы круглый год и заботимся о каждом для вас.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Отзывы -->
+    <section class="section">
+        <h2 class="section-title">Отзывы наших клиентов</h2>
+        <div class="reviews">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">АП</div>
+                    <div class="review-info">
+                        <h4>Анна Петрова</h4>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>"Заказывала цветы на годовщину свадьбы. Цветы были невероятно свежие и красивые! Муж был в восторге. Доставка пришла точно в указанное время. Обязательно буду заказывать еще!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">МС</div>
+                    <div class="review-info">
+                        <h4>Максим Смирнов</h4>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>"Пользуюсь услугами магазина уже больше года. Всегда качественные цветы, профессиональные флористы. Особенно нравится сервис доставки - всегда вовремя и аккуратно."</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">ЕК</div>
+                    <div class="review-info">
+                        <h4>Екатерина Ковалева</h4>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>"Заказала цветы для подруги на день рождения. Сделали именно то, что я хотела, даже лучше! Подруга была в полном восторге. Теперь рекомендую ваш магазин всем знакомым!"</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Цветнечёк у Олечки</h3>
+                <p>Магазин цветов с душой. Мы создаем красивые цветы, которые дарят радость и выражают ваши чувства.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Магазин</h3>
+                <ul class="footer-links">
+                    <li><a href="catalog.html">Каталог букетов</a></li>
+                    <li><a href="#promotions">Акции и скидки</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Помощь</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Доставка и оплата</a></li>
+                    <li><a href="#">Уход за цветами</a></li>
+                    <li><a href="#">Частые вопросы</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <p><i class="fas fa-map-marker-alt"></i> г.п. Вороново, ул. Аэродромная, д. 25</p>
+                <p><i class="fas fa-phone"></i> +375 25 530-99-49 / +375 (33) 623-94-33</p>
+                <p><i class="fas fa-envelope"></i> olgabalts@gmail.com / ilyabalt345ilya1@gmail.com</p>
+                <p><i class="fas fa-clock"></i> Ежедневно с 10:00 до 20:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Магазин цветов "Цветнечёк у Олечки". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification">Товар добавлен в корзину!</div>
+
+    <!-- Кнопка техподдержки -->
+    <button class="support-button" id="supportButton">
+        <i class="fas fa-headset"></i>
+        <span class="support-text">Техподдержка</span>
+    </button>
+
+    <!-- Меню техподдержки -->
+    <div class="support-menu" id="supportMenu">
+        <div class="support-header">
+            <h3>Служба поддержки</h3>
+        </div>
+        <div class="support-items">
+            <div class="support-item" onclick="openSupport('viber')">
+                <i class="fab fa-viber"></i>
+                <span>Viber: +375 29 210-53-90</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('telegram')">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram: +375 29 210-53-90</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('phone')">
+                <i class="fas fa-phone"></i>
+                <span>Позвонить: +375 29 210-53-90</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('email')">
+                <i class="fas fa-envelope"></i>
+                <span>Написать на почту</span>
+            </div>
+            <div class="support-divider"></div>
+            <div class="support-item" onclick="openSupport('faq')">
+                <i class="fas fa-question-circle"></i>
+                <span>Частые вопросы</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ТОВАРЫ
+        const promotionalProducts = [
+            { id: 1, name: "Георгины вегетативные", price: 8, oldPrice: 12, description: "Низкорослые георгины для сада", image: "https://i.okcdn.ru/i?r=CFRAm_VFBkioSGBqh1KLntt06MFo4g5uSnK0cvpuqrPJ995xVi3fxSXrV17J_etk9d0segI-1U3enf481quDrAG8n2RMBiefhyQv195j0SSEkZlA_QAAACk", badge: "АКЦИЯ" },
+            { id: 2, name: "Бальзамин новогвинейский", price: 9, oldPrice: 15, description: "Декоративный бальзамин с яркими цветами", image: "https://i.okcdn.ru/i?r=CFRAm_VFBkioSGBqh1IKUtFwKHEdY8wagSMfym_uNdySumU0muPNNzMA_YkvAJr0qZWh0LUrQHkkrKLFoR_NKBNgH88vL7jCk33EPsT0KoYMXUWEAgAAACk", badge: "СКИДКА" },
+            { id: 5, name: "Букет 'Страсть'", price: 38, oldPrice: 45, description: "Яркие красные розы в элегантной упаковке", image: "https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", badge: "АКЦИЯ" }
+        ];
+        
+        const newSeasonProducts = [
+            { id: 3, name: "Бегонии", price: 6, description: "Красивые бегонии для дома и сада", image: "https://i.okcdn.ru/i?r=CFxAm_VFBkioSGBqh1LamAAOc8pbUTclt-RyglJI6NK9iz8eUjTKfFt-d3OFUsyZsqltUpmMLTCX19JX_Uh8fEGjMNCf3zMd-p_D-QeyziEhVmlGoAgunXwsIg68AAAAKQ", badge: "НОВИНКА" },
+            { id: 4, name: "Розы красные", price: 12, description: "Красные розы, 10 штук", image: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00", badge: "НОВОЕ" },
+            { id: 6, name: "Тюльпаны весенние", price: 15, description: "Яркие тюльпаны разных цветов", image: "https://images.unsplash.com/photo-1495231916356-a86217efff12", badge: "СЕЗОН" }
+        ];
+        
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let cart = JSON.parse(localStorage.getItem('flowerCart')) || [];
+        
+        if (!currentUser) {
+            window.location.href = 'index.html';
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (currentUser) {
+                document.getElementById('user-greeting').textContent = `Привет, ${currentUser.name}!`;
+                document.getElementById('welcome-message').textContent = `Добро пожаловать, ${currentUser.name}!`;
+            }
+            
+            showPromotionalProducts();
+            showNewSeasonProducts();
+            updateCartCount();
+            setupLogout();
+            setupSupportButton();
+        });
+        
+        function showPromotionalProducts() {
+            const container = document.getElementById('promotional-products');
+            if (!container) return;
+            
+            let html = '';
+            promotionalProducts.forEach(product => {
+                const isFavorite = checkFavoriteStatus(product.id);
+                const heartClass = isFavorite ? 'fas fa-heart' : 'far fa-heart';
+                
+                html += `
+                <div class="product-card">
+                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    <button class="product-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(${product.id})">
+                        <i class="${heartClass}"></i>
+                    </button>
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Цветок'">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">
+                            ${product.oldPrice ? `<span class="old-price">${product.oldPrice} руб.</span>` : ''}
+                            <span class="current-price">${product.price} руб.</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary" onclick="addToCart(${product.id})">В корзину</button>
+                            <a href="product-details.html?id=${product.id}" class="btn-details">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        
+        function showNewSeasonProducts() {
+            const container = document.getElementById('new-season-products');
+            if (!container) return;
+            
+            let html = '';
+            newSeasonProducts.forEach(product => {
+                const isFavorite = checkFavoriteStatus(product.id);
+                const heartClass = isFavorite ? 'fas fa-heart' : 'far fa-heart';
+                
+                html += `
+                <div class="product-card">
+                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    <button class="product-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(${product.id})">
+                        <i class="${heartClass}"></i>
+                    </button>
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Цветок'">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">
+                            <span class="current-price">${product.price} руб.</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-primary" onclick="addToCart(${product.id})">В корзину</button>
+                            <a href="product-details.html?id=${product.id}" class="btn-details">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        
+        function checkFavoriteStatus(productId) {
+            if (!currentUser) return false;
+            const users = JSON.parse(localStorage.getItem('flowerShopUsers')) || [];
+            const user = users.find(u => u.email === currentUser.email);
+            return user && user.favorites && user.favorites.includes(productId);
+        }
+        
+        window.toggleFavorite = function(productId) {
+            if (!currentUser) {
+                alert('Войдите в аккаунт чтобы добавить в избранное');
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('flowerShopUsers')) || [];
+            const userIndex = users.findIndex(u => u.email === currentUser.email);
+            if (userIndex === -1) return;
+            
+            if (!users[userIndex].favorites) users[userIndex].favorites = [];
+            
+            const favorites = users[userIndex].favorites;
+            const isFavorite = favorites.includes(productId);
+            
+            if (!isFavorite) {
+                favorites.push(productId);
+                showMessage('Товар добавлен в избранное');
+            } else {
+                users[userIndex].favorites = favorites.filter(id => id !== productId);
+                showMessage('Товар удален из избранного');
+            }
+            
+            localStorage.setItem('flowerShopUsers', JSON.stringify(users));
+            
+            // Обновить отображение
+            showPromotionalProducts();
+            showNewSeasonProducts();
+        };
+        
+        window.addToCart = function(productId) {
+            const allProducts = [...promotionalProducts, ...newSeasonProducts];
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            let item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += 1;
+            } else {
+                cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, quantity: 1 });
+            }
+            
+            localStorage.setItem('flowerCart', JSON.stringify(cart));
+            updateCartCount();
+            showMessage(`"${product.name}" добавлен в корзину!`);
+        };
+        
+        function updateCartCount() {
+            const countElement = document.getElementById('cart-count');
+            if (countElement) {
+                countElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            }
+        }
+        
+        function showMessage(text) {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.textContent = text;
+                notification.style.display = 'block';
+                setTimeout(() => notification.style.display = 'none', 3000);
+            }
+        }
+        
+        function setupLogout() {
+            const logoutBtn = document.getElementById('logout');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('flowerCart');
+                    window.location.href = 'index.html';
+                });
+            }
+        }
+        
+        function setupSupportButton() {
+            const supportButton = document.getElementById('supportButton');
+            const supportMenu = document.getElementById('supportMenu');
+            
+            if (supportButton && supportMenu) {
+                supportButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    supportMenu.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!supportMenu.contains(e.target) && !supportButton.contains(e.target)) {
+                        supportMenu.classList.remove('active');
+                    }
+                });
+                
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        supportMenu.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        function openSupport(type) {
+            let link = '';
+            switch(type) {
+                case 'viber':
+                    link = 'viber://chat?number=%2B375292105390';
+                    window.location.href = link;
+                    break;
+                case 'telegram':
+                    link = 'https://t.me/+375292105390';
+                    window.open(link, '_blank');
+                    break;
+                case 'phone':
+                    link = 'tel:+375292105390';
+                    window.location.href = link;
+                    break;
+                case 'email':
+                    link = 'mailto:ilyabalt345ilya1@gmail.com?subject=Вопрос%20по%20заказу&body=Здравствуйте!%20У%20меня%20вопрос%20по%20заказу...';
+                    window.location.href = link;
+                    break;
+                case 'faq':
+                    alert('Раздел "Частые вопросы" скоро появится на сайте!');
+                    break;
+            }
+            document.getElementById('supportMenu').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
